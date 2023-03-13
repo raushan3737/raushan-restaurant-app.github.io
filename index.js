@@ -391,7 +391,7 @@ function makeHeaderForPopup(tableName, tableId) {
   let checkoutBtn = document.createElement("button");
   // Adding class to style the button for all table
   checkoutBtn.className = "checkoutBtn"; 
-  checkoutBtn.textContent = "CLOSE SESSION (GENERATE BILL)";
+  checkoutBtn.textContent = "GENERATE BILL";
   checkoutBtn.id = `${tableId}CheckoutBtn`;
 
   headerRow.append(serialNo);
@@ -555,8 +555,6 @@ function checkoutTable (popup , tableCheckOutBtn ,  popupBillElementId ,  tableM
   let tableCheckOutBtnElement = document.getElementById(tableCheckOutBtn) ; 
       // Adding eventlistener to final checkout which will be called on btn click
       tableCheckOutBtnElement.addEventListener("click" , ()=>{
-        console.log("final"); 
-        window.print();
         popup.innerHTML= "" ; 
         tableCardPrice.textContent = "Rs: 0";
         tableCardQuantity.textContent = "Total items: 0"; 
@@ -579,8 +577,5 @@ function totalBillForCurrentTable(tableMap)
   }
   return totalBillAmount ; 
 }
-
-
-// console.log(table_1Map, table_2Map, table_3Map, table_4Map, table_5Map);
 
 
