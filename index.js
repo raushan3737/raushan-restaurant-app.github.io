@@ -23,11 +23,11 @@ which will be used to update the popup & generate bill
 
 */
 
-let table_1 = new Map();
-let table_2 = new Map();
-let table_3 = new Map();
-let table_4 = new Map();
-let table_5 = new Map();
+let table_1Map = new Map();
+let table_2Map = new Map();
+let table_3Map = new Map();
+let table_4Map = new Map();
+let table_5Map = new Map();
 
 
 // Targeting the searchbar
@@ -37,7 +37,7 @@ const menuSearchBar = document.forms["search-menus"].querySelector("input");
 // On double click for table1
 table1.addEventListener("dblclick", () => {
   // On double click, popup will open if it has some item added on it
-  if (table_1.size) {
+  if (table_1Map.size) {
     popup1.classList.add("show");
     overlay.classList.add("show");
     document.body.appendChild(overlay);
@@ -46,7 +46,7 @@ table1.addEventListener("dblclick", () => {
     let tableCardQuantity = tableItemsBoxes[0].children[0].children[2] ;   
 
     // Function to checkout current table 
-    checkoutTable( popup1 ,"table-1CheckoutBtn", "popup1TableBill" , table_1  , tableCardPrice , tableCardQuantity);
+    checkoutTable( popup1 ,"table-1CheckoutBtn", "popup1TableBill" , table_1Map  , tableCardPrice , tableCardQuantity);
 
     // On click on x , popup will be close
     closeBtn1.addEventListener("click", () => {
@@ -59,7 +59,7 @@ table1.addEventListener("dblclick", () => {
 // On double click for table2
 table2.addEventListener("dblclick", () => {
   // On double click, popup will open if it has some item added on it
-  if (table_2.size) {
+  if (table_2Map.size) {
     popup2.classList.add("show");
     overlay.classList.add("show");
     document.body.appendChild(overlay);
@@ -68,7 +68,7 @@ table2.addEventListener("dblclick", () => {
     let tableCardQuantity = tableItemsBoxes[1].children[0].children[2] ; 
 
     // Function to checkout current table 
-    checkoutTable(popup2 ,  "table-2CheckoutBtn", "popup2TableBill" , table_2 , tableCardPrice , tableCardQuantity );
+    checkoutTable(popup2 ,  "table-2CheckoutBtn", "popup2TableBill" , table_2Map , tableCardPrice , tableCardQuantity );
 
     // On click on x , popup will be close
     closeBtn2.addEventListener("click", () => {
@@ -81,7 +81,7 @@ table2.addEventListener("dblclick", () => {
 // On double click for table3
 table3.addEventListener("dblclick", () => {
   // On double click, popup will open if it has some item added on it
-  if (table_3.size) {
+  if (table_3Map.size) {
     popup3.classList.add("show");
     overlay.classList.add("show");
     document.body.appendChild(overlay);
@@ -90,7 +90,7 @@ table3.addEventListener("dblclick", () => {
     let tableCardQuantity = tableItemsBoxes[2].children[0].children[2] ; 
 
     // Function to checkout current table 
-    checkoutTable( popup3 , "table-3CheckoutBtn" , "popup3TableBill" , table_3  , tableCardPrice , tableCardQuantity);
+    checkoutTable( popup3 , "table-3CheckoutBtn" , "popup3TableBill" , table_3Map  , tableCardPrice , tableCardQuantity);
 
     // On click on x , popup will be close
     closeBtn3.addEventListener("click", () => {
@@ -103,7 +103,7 @@ table3.addEventListener("dblclick", () => {
 // On double click for table4
 table4.addEventListener("dblclick", () => {
   // On double click, popup will open if it has some item added on it
-  if (table_4.size) {
+  if (table_4Map.size) {
     popup4.classList.add("show");
     overlay.classList.add("show");
     document.body.appendChild(overlay);
@@ -112,7 +112,7 @@ table4.addEventListener("dblclick", () => {
     let tableCardQuantity = tableItemsBoxes[3].children[0].children[2] ; 
 
      // Function to checkout current table 
-    checkoutTable( popup4,  "table-4CheckoutBtn" , "popup4TableBill" , table_4 , tableCardPrice , tableCardQuantity );
+    checkoutTable( popup4,  "table-4CheckoutBtn" , "popup4TableBill" , table_4Map , tableCardPrice , tableCardQuantity );
 
     // On click on x , popup will be close
     closeBtn4.addEventListener("click", () => {
@@ -126,7 +126,7 @@ table4.addEventListener("dblclick", () => {
 
 table5.addEventListener("dblclick", () => {
   // On double click, popup will open if it has some item added on it.
-  if (table_5.size) {
+  if (table_5Map.size) {
     popup5.classList.add("show");
     overlay.classList.add("show");
     document.body.appendChild(overlay);
@@ -135,7 +135,7 @@ table5.addEventListener("dblclick", () => {
     let tableCardQuantity = tableItemsBoxes[4].children[0].children[2] ; 
 
     // Function to checkout current table 
-    checkoutTable(popup5 ,  "table-5CheckoutBtn", "popup5TableBill" , table_5  , tableCardPrice , tableCardQuantity);
+    checkoutTable(popup5 ,  "table-5CheckoutBtn", "popup5TableBill" , table_5Map  , tableCardPrice , tableCardQuantity);
 
     // On click on x , popup will be close
     closeBtn5.addEventListener("click", () => {
@@ -215,87 +215,87 @@ function drop(ev) {
 
   if (tableName == "Table 1") {
     // if itemInfo not present in map
-    if (!table_1.has(itemName)) {
-      table_1.set(itemName, [itemPrice, 1]);
+    if (!table_1Map.has(itemName)) {
+      table_1Map.set(itemName, [itemPrice, 1]);
       itemsQuantity++;
       tableDet[2].textContent = `Total items: ${itemsQuantity}`;
-      let serialNo = table_1.size;
-      generateRow(table_1,tableDet[1],tableDet[2],updatedPrice,itemsQuantity,serialNo, "popup1Bill", itemName, itemPrice);
+      let serialNo = table_1Map.size;
+      generateRow(table_1Map,tableDet[1],tableDet[2],updatedPrice,itemsQuantity,serialNo, "popup1Bill", itemName, itemPrice);
     }
     // If it is present in map
     else {
       // Updating the quantity of already added item in map
-      table_1.set(itemName, [itemPrice, table_1.get(itemName)[1] + 1]);
-      updateInput(table_1, "popup1" , itemName );
+      table_1Map.set(itemName, [itemPrice, table_1Map.get(itemName)[1] + 1]);
+      updateInput(table_1Map, "popup1" , itemName );
     }
   }
 
   if (tableName == "Table 2") {
     // if itemInfo not present in map
-    if (!table_2.has(itemName)) {
-      table_2.set(itemName, [itemPrice, 1]);
+    if (!table_2Map.has(itemName)) {
+      table_2Map.set(itemName, [itemPrice, 1]);
       itemsQuantity++;
       tableDet[2].textContent = `Total items: ${itemsQuantity}`;
-      let serialNo = table_2.size;
-      generateRow(table_2,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup2Bill", itemName, itemPrice);
+      let serialNo = table_2Map.size;
+      generateRow(table_2Map,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup2Bill", itemName, itemPrice);
       
     }
     // If it is present in map
     else {
       // Updating the quantity of already added item in map
-      table_2.set(itemName, [itemPrice, table_2.get(itemName)[1] + 1]);
-      updateInput(table_2, "popup2" , itemName );
+      table_2Map.set(itemName, [itemPrice, table_2Map.get(itemName)[1] + 1]);
+      updateInput(table_2Map, "popup2" , itemName );
     }
   }
 
   if (tableName == "Table 3") {
     // if itemInfo not present in map
-    if (!table_3.has(itemName)) {
-      table_3.set(itemName, [itemPrice, 1]);
+    if (!table_3Map.has(itemName)) {
+      table_3Map.set(itemName, [itemPrice, 1]);
       itemsQuantity++;
       tableDet[2].textContent = `Total items: ${itemsQuantity}`;
-      let serialNo = table_3.size;
-      generateRow(table_3,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup3Bill", itemName, itemPrice);
+      let serialNo = table_3Map.size;
+      generateRow(table_3Map,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup3Bill", itemName, itemPrice);
     }
     // If it is present in map
     else {
       // Updating the quantity of already added item in map
-      table_3.set(itemName, [itemPrice, table_3.get(itemName)[1] + 1]);
-      updateInput(table_3, "popup3" , itemName );
+      table_3Map.set(itemName, [itemPrice, table_3Map.get(itemName)[1] + 1]);
+      updateInput(table_3Map, "popup3" , itemName );
     }
   }
 
   if (tableName == "Table 4") {
     // if itemInfo not present in map
-    if (!table_4.has(itemName)) {
-      table_4.set(itemName, [itemPrice, 1]);
+    if (!table_4Map.has(itemName)) {
+      table_4Map.set(itemName, [itemPrice, 1]);
       itemsQuantity++;
       tableDet[2].textContent = `Total items: ${itemsQuantity}`;
-      let serialNo = table_4.size;
-      generateRow(table_4,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup4Bill", itemName, itemPrice);
+      let serialNo = table_4Map.size;
+      generateRow(table_4Map,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup4Bill", itemName, itemPrice);
     }
     // If it is present in map
     else {
       // Updating the quantity of already added item in map
-      table_4.set(itemName, [itemPrice, table_4.get(itemName)[1] + 1]);
-      updateInput(table_4, "popup4" , itemName );
+      table_4Map.set(itemName, [itemPrice, table_4Map.get(itemName)[1] + 1]);
+      updateInput(table_4Map, "popup4" , itemName );
     }
   }
 
   if (tableName == "Table 5") {
     // if itemInfo not present in map
-    if (!table_5.has(itemName)) {
-      table_5.set(itemName, [itemPrice, 1]);
+    if (!table_5Map.has(itemName)) {
+      table_5Map.set(itemName, [itemPrice, 1]);
       itemsQuantity++;
       tableDet[2].textContent = `Total items: ${itemsQuantity}`;
-      let serialNo = table_5.size;
-      generateRow(table_5,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup5Bill", itemName, itemPrice);
+      let serialNo = table_5Map.size;
+      generateRow(table_5Map,tableDet[1],tableDet[2],updatedPrice,itemsQuantity, serialNo, "popup5Bill", itemName, itemPrice);
     }
     // If it is present in map
     else {
       // Updating the quantity of already added item in map
-      table_5.set(itemName, [itemPrice, table_5.get(itemName)[1] + 1]);
-      updateInput(table_5, "popup5" , itemName );
+      table_5Map.set(itemName, [itemPrice, table_5Map.get(itemName)[1] + 1]);
+      updateInput(table_5Map, "popup5" , itemName );
     }
   }
 
@@ -501,15 +501,15 @@ function generateRow(tableMap,totalPriceOnTable, totalQuantityOnTable,tablePrice
 // Function to update the map on deletion operation
 function updateMap(popupBillTableId, currItemName) {
   if (popupBillTableId === "popup1Bill") {
-    table_1.delete(currItemName);
+    table_1Map.delete(currItemName);
   } else if (popupBillTableId === "popup2Bill") {
-    table_2.delete(currItemName);
+    table_2Map.delete(currItemName);
   } else if (popupBillTableId === "popup3Bill") {
-    table_3.delete(currItemName);
+    table_3Map.delete(currItemName);
   } else if (popupBillTableId === "popup4Bill") {
-    table_4.delete(currItemName);
+    table_4Map.delete(currItemName);
   } else {
-    table_5.delete(currItemName);
+    table_5Map.delete(currItemName);
   }
 }
 
@@ -581,6 +581,6 @@ function totalBillForCurrentTable(tableMap)
 }
 
 
-// console.log(table_1, table_2, table_3, table_4, table_5);
+// console.log(table_1Map, table_2Map, table_3Map, table_4Map, table_5Map);
 
 
